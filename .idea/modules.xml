@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bookrack.iml" filepath="$PROJECT_DIR$/bookrack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bookrack-frontend.iml" filepath="$PROJECT_DIR$/bookrack-frontend.iml" />
     </modules>
   </component>
 </project>
