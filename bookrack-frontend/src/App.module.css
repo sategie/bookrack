@@ -5,6 +5,14 @@
   text-align: center;
 }
 
+html {
+  font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

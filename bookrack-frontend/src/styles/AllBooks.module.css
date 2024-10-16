@@ -1,0 +1,9 @@
+.cardImage{
+    height:10rem;
+    width:auto;
+    object-fit: cover;
+}
+
+.bookTitle{
+    font-size: 2.5rem;
+}
