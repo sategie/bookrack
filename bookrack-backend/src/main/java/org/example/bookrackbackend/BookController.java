@@ -9,10 +9,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/books")
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class BookController {
 
     private final BookService bookService;
+
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @GetMapping()
     public List<Book> getAllBooks() {
