@@ -15,7 +15,8 @@ public class BookServiceTest {
 
     @Test
     void getAllBooks_shouldReturnAllBooks_ifBooksExist() {
-        Book book1 = new Book("1", "Things Fall Apart", "Chinua Achebe", "Nigeria", 1958, "images/things-fall-apart.jpg");
+        Book book1 = new Book("1", "Things Fall Apart", "Chinua Achebe", "Nigeria", 1958,
+                "images/things-fall-apart.jpg");
         List<Book> testBooks = List.of(book1);
 
         when(mockBookRepo.findAll()).thenReturn(testBooks);
