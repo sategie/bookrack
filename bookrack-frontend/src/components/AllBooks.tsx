@@ -10,12 +10,12 @@ export default function AllBooks({books}: AllBooksProps) {
         <div className="container">
             <h1>All Books</h1>
             {books.length > 0 ? (
-                <div className="row">
+                <div className={`row`}>
                     {books.map(book => (
-                        <div className="col-md-6 mb-4" key={book.id}>
+                        <div className="col-lg-4 col-md-6 col-sm-12 mb-4" key={book.id}>
                             <div className="card h-100">
                                 <div className="row g-0">
-                                    <div className="col-md-8">
+                                    <div className="col-8">
                                         <div className="card-body">
                                             <h5 className={`card-title ${styles.bookTitle}`}>{book.title}</h5>
                                             <p className="card-text">Author: {book.author}</p>
@@ -23,7 +23,7 @@ export default function AllBooks({books}: AllBooksProps) {
                                             <p className="card-text">Year of Publication: {book.year}</p>
                                         </div>
                                     </div>
-                                    <div className="col-md-4">
+                                    <div className="col-4">
                                         <img
                                             src={book.imageLink}
                                             className={`img-fluid ${styles.cardImage}`}
