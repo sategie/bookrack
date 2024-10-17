@@ -1,6 +1,5 @@
 package org.example.bookrackbackend;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,5 +14,9 @@ public class BookService {
 
     public List<Book> getAllBooks() {
         return bookRepo.findAll();
+    }
+
+    public Book getBookById(String id) {
+        return bookRepo.findById(id).orElseThrow();
     }
 }
