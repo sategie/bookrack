@@ -1,11 +1,10 @@
 package org.example.bookrackbackend;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/books")
@@ -26,6 +25,16 @@ public class BookController {
     public Book getBookById(@PathVariable String id){
         return bookService.getBookById(id);
     }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NoSuchElementException.class)
+    public ErrorMessage handleNoSuchElementException() {
+        return new ErrorMessage("Sorry, the provided ID was not found.");
+    }
+
+
+
+
 
 
 }
