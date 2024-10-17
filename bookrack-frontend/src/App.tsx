@@ -1,9 +1,10 @@
 import {useEffect, useState} from 'react'
-import './App.css'
+import './App.module.css'
 import {Book} from "./assets/types/Book.ts";
 import {Route, Routes} from "react-router-dom";
 import axios from "axios";
 import AllBooks from "./components/AllBooks.tsx";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [books, setBooks] = useState<Book[]>([])
@@ -22,6 +23,7 @@ function App() {
 
   return (
       <>
+
           <Routes>
               <Route path={"/allbooks"} element={<AllBooks books={books} />}/>
           </Routes>

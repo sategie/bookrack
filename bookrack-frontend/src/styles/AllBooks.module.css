@@ -1,0 +1,14 @@
+.fixedHeader{
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+}
+
+.cardImage{
+    height:10rem;
+    width:100%;
+    object-fit: cover;
+}
+
+.bookTitle{
+    font-size: 2.5rem;
+}
