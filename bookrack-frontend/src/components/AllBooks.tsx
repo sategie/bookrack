@@ -8,7 +8,7 @@ export type AllBooksProps = {
 export default function AllBooks({books}: AllBooksProps) {
     return (
         <div className="container">
-            <h1>All Books</h1>
+            <h1 className = {styles.fixedHeader}>All Books</h1>
             {books.length > 0 ? (
                 <div className={`row`}>
                     {books.map(book => (
