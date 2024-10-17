@@ -78,4 +78,13 @@ class BookControllerTest {
                 """));
 
     }
+
+    @Test
+    void getBookById_shouldThrowException_whenInvalidIdProvided() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/books/#")).andExpect(status().isNotFound())
+                .andExpect(content().json("""
+                {"message": "Please provide a valid ID."}
+                """));
+
+    }
 }
