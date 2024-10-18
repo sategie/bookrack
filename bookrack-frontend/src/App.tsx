@@ -5,6 +5,7 @@ import {Route, Routes} from "react-router-dom";
 import axios from "axios";
 import AllBooks from "./components/AllBooks.tsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import BookDetails from "./components/BookDetails.tsx";
 
 function App() {
   const [books, setBooks] = useState<Book[]>([])
@@ -25,7 +26,9 @@ function App() {
       <>
 
           <Routes>
-              <Route path={"/allbooks"} element={<AllBooks books={books} />}/>
+              <Route path="/allbooks" element={<AllBooks books={books} />}/>
+              <Route path="/allbooks/:id" element={<BookDetails books={books} />}  />
+
           </Routes>
 
 
