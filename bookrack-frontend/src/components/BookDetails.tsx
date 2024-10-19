@@ -15,10 +15,13 @@ export default function BookDetails({ books }: BookDetailsProps){
 
     const book = books.find(book => book.id === id);
 
+
     return (
         <div className="container">
             <h1>Book Details</h1>
-            {book ? <BookCard book={book} /> : <p>Book not found</p>}
+            {book ? <BookCard book={book}/> : <p>Book not found</p>}
+
+
         </div>
     );
 };

@@ -2,14 +2,12 @@ import {Book} from "../assets/types/Book.ts";
 import styles from "../styles/AllBooks.module.css";
 
 export type BookCardProps = {
-    book:Book
+    book: Book;
+    onClick?: () => void; // Add onClick as an optional prop
 }
-
-
-export default function BookCard({book}: BookCardProps){
-
-    return(
-        <div className="col-lg-4 col-md-6 col-sm-12 mb-4" key={book.id}>
+export default function BookCard({ book, onClick }: BookCardProps) {
+    return (
+        <div className="col-lg-4 col-md-6 col-sm-12 mb-4" onClick={onClick} style={{ cursor: 'pointer' }}>
             <div className="card h-100">
                 <div className="row g-0">
                     <div className="col-8">
