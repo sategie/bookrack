@@ -1,13 +1,38 @@
 import {Book} from "../assets/types/Book.ts";
 import styles from "../styles/AllBooks.module.css";
+import React from "react";
 
 export type BookCardProps = {
     book: Book;
     onClick?: () => void; // Add onClick as an optional prop
 }
 export default function BookCard({ book, onClick }: BookCardProps) {
+
+    /**
+     * Handles the keydown event for the BookCard.
+     *
+     * This function provides keyboard accessibility for the BookCard component.
+     *
+     * It checks if the 'Enter' or 'Space' key is pressed and triggers the onClick
+     * function if available. This ensures that the component can be interacted with if there is no
+     * mouse.
+     *
+     * @param event - The keyboard event triggered when a key is pressed.
+     */
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if ((event.key === "Enter" || event.key === "") && onClick) {
+            onClick();
+        }
+    }
+
     return (
-        <div className="col-lg-4 col-md-6 col-sm-12 mb-4" onClick={onClick} style={{ cursor: 'pointer' }}>
+        <div className="col-lg-4 col-md-6 col-sm-12 mb-4"
+             onClick={onClick}
+             onKeyDown={handleKeyDown}
+             style={{ cursor: 'pointer' }}
+        tabIndex={0} //Ensures the element is focusable when using a keyboard
+        role="button" //Tells assistive technologies that this is an interactive element
+        >
             <div className="card h-100">
                 <div className="row g-0">
                     <div className="col-8">
