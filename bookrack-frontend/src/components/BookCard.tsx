@@ -5,8 +5,9 @@ import React from "react";
 export type BookCardProps = {
     book: Book;
     onClick?: () => void; // Add onClick as an optional prop
+    className?: string; // Add className as an optional prop
 }
-export default function BookCard({ book, onClick }: BookCardProps) {
+export default function BookCard({ book, onClick, className}: BookCardProps) {
 
     /**
      * Handles the keydown event for the BookCard.
@@ -26,7 +27,7 @@ export default function BookCard({ book, onClick }: BookCardProps) {
     }
 
     return (
-        <div className="col-lg-4 col-md-6 col-sm-12 mb-4"
+        <div className={`col-lg-4 col-md-6 col-sm-12 mb-4 ${className}`}
              onClick={onClick}
              onKeyDown={handleKeyDown}
              style={{ cursor: 'pointer' }}

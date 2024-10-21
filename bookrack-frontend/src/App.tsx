@@ -24,7 +24,6 @@ function App() {
 
   return (
       <>
-
           <Routes>
               <Route path="/allbooks" element={<AllBooks books={books} />}/>
               <Route path="/allbooks/:id" element={<BookDetails books={books} />}  />

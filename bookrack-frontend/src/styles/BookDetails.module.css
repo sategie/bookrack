@@ -1,0 +1,10 @@
+/*.Header{*/
+/*    margin-bottom: 4rem;*/
+/*    margin-top: 2rem;*/
+/*}*/
+
+.detailedCard {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
