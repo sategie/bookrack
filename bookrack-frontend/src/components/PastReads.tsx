@@ -7,6 +7,7 @@ export type PastReadProps={
 
 
 export default function PastReads({books}:PastReadProps){
+    console.log("PastReads: ", books)
 
     return(
         <>

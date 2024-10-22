@@ -6,9 +6,10 @@ import styles from "../styles/BookDetails.module.css";
 
 export type BookDetailsProps = {
     books: Book[];
+    addToPastReads:(book:Book) => void
 };
 
-export default function BookDetails({ books }: BookDetailsProps){
+export default function BookDetails({ books, addToPastReads}: BookDetailsProps){
     const { id } = useParams<{id:string}>();
 
     /**
@@ -22,10 +23,13 @@ export default function BookDetails({ books }: BookDetailsProps){
         <div className="container">
             <h1>Book Details</h1>
             {book ? (
-                <BookCard book={book} className={styles.detailedCard} />
-                ) : (
-                    <p>Book not found</p>
-                )}
+                <div>
+                    <BookCard book={book} className={styles.detailedCard}/>
+                    <button onClick={() => addToPastReads(book)}>Add to Past Reads</button>
+                </div>
+            ) : (
+                <p>Book not found</p>
+            )}
 
 
         </div>

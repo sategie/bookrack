@@ -26,7 +26,9 @@ function App() {
 
     const addToPastReads = (book:Book) => {
         setPastReads([...pastReads, book]);
+        console.log("Added book to Past Reads: ", book);
     }
+
 
   return (
       <>
