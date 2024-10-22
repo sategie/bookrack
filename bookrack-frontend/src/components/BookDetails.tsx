@@ -5,27 +5,51 @@ import styles from "../styles/BookDetails.module.css";
 
 
 export type BookDetailsProps = {
-    books: Book[];
+    books: Book[]
+    addToPastReads:(book:Book) => void
+    pastReads:Book[]
+
 };
 
-export default function BookDetails({ books }: BookDetailsProps){
+export default function BookDetails({ books, pastReads, addToPastReads}: BookDetailsProps){
     const { id } = useParams<{id:string}>();
 
     /**
      * The find method returns the first book in the books array which matches the specified condition
      */
-
     const book = books.find(book => book.id === id);
+
+
+    /**
+     * Prevents adding duplicate entries in the Past Reads list
+     *
+     * Uses the "some" method to check if there is at least one book in the pastReads array that matches
+     * the condition: pastReadBook => pastReadBook.id === book.id
+     *
+     * @param book - The book object which needs to be added to the Past Reads list
+     */
+    const handleAddToPastReads = (book: Book) => {
+        // Check if the book is already in pastReads
+        const alreadyAdded = pastReads.some(pastReadBook => pastReadBook.id === book.id);
+        if (!alreadyAdded) {
+            addToPastReads(book);
+        } else {
+            console.log("Book is already in Past Reads.");
+        }
+    };
 
 
     return (
         <div className="container">
             <h1>Book Details</h1>
             {book ? (
-                <BookCard book={book} className={styles.detailedCard} />
-                ) : (
-                    <p>Book not found</p>
-                )}
+                <div>
+                    <BookCard book={book} className={styles.detailedCard}/>
+                    <button onClick={() => handleAddToPastReads(book)}>Add to Past Reads</button>
+                </div>
+            ) : (
+                <p>Book not found</p>
+            )}
 
 
         </div>
