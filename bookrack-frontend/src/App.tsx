@@ -10,7 +10,12 @@ import PastReads from "./components/PastReads.tsx";
 
 function App() {
   const [books, setBooks] = useState<Book[]>([]);
-  const [pastReads, setPastReads] = useState<Book[]>([]);
+
+    const [pastReads, setPastReads] = useState<Book[]>(() => {
+        // Load past reads from localStorage on initialization
+        const savedPastReads = localStorage.getItem('pastReads');
+        return savedPastReads ? JSON.parse(savedPastReads) : [];
+    });
 
     const fetchBooksData = () => {
       axios.get("/api/books")
@@ -25,8 +30,10 @@ function App() {
     )
 
     const addToPastReads = (book:Book) => {
-        setPastReads([...pastReads, book]);
-        console.log("Added book to Past Reads: ", book);
+        const updatedPastReads = [...pastReads, book]
+        setPastReads(updatedPastReads)
+        localStorage.setItem('pastReads', JSON.stringify(updatedPastReads))
+        console.log("Added book to Past Reads: ", book)
     }
 
 
