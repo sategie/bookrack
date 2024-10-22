@@ -57,7 +57,9 @@ function App() {
         <>
             <Routes>
                 <Route path="/allbooks" element={<AllBooks books={books} />}/>
-                <Route path="/allbooks/:id" element={<BookDetails books={books} addToPastReads={addToPastReads} />}  />
+                <Route path="/allbooks/:id" element={<BookDetails books={books}
+                                                                  pastReads={pastReads}
+                                                                  addToPastReads={addToPastReads} />}  />
                 <Route path="/pastreads" element={<PastReads books={pastReads}/>}/>
 
             </Routes>
