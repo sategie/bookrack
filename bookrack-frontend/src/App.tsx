@@ -7,6 +7,7 @@ import AllBooks from "./components/AllBooks.tsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BookDetails from "./components/BookDetails.tsx";
 import PastReads from "./components/PastReads.tsx";
+import FutureReads from "./components/FutureReads.tsx";
 
 function App() {
     const [books, setBooks] = useState<Book[]>([]);
@@ -19,12 +20,26 @@ function App() {
      */
 
     const loadPastReads = (): Book[] => {
-        const savedPastReads = localStorage.getItem('pastReads');
-        return savedPastReads ? JSON.parse(savedPastReads) : [];
+        const savedPastReads = localStorage.getItem("pastReads")
+        return savedPastReads ? JSON.parse(savedPastReads) : []
     }
 
-
     const [pastReads, setPastReads] = useState<Book[]>(loadPastReads);
+
+    /**
+     * Loads the list of future reads from the local storage.
+     *
+     * @return {Book[]} - An array of the Book objects (parsed savedFutureReads) if it exists,
+     * otherwise it returns an empty array
+     */
+    const loadFutureReads = (): Book[] => {
+        const savedFutureReads = localStorage.getItem("futureReads")
+        return savedFutureReads ? JSON.parse(savedFutureReads) : []
+    }
+
+    const [futureReads, setFutureReads] = useState<Book[]>([])
+
+
 
 
 
@@ -48,8 +63,20 @@ function App() {
     const addToPastReads = (book:Book) => {
         const updatedPastReads = [...pastReads, book]
         setPastReads(updatedPastReads)
-        localStorage.setItem('pastReads', JSON.stringify(updatedPastReads))
+        localStorage.setItem("pastReads", JSON.stringify(updatedPastReads))
         console.log("Added book to Past Reads: ", book)
+    }
+
+    /**
+     * Adds a specific book to the list of future read books and uses localStorage to save the list on the client side
+     *
+     * @param book - The book object which is added to the future read list
+     */
+    const addToFutureReads = (book:Book)=> {
+        const updatedFutureReads = [...futureReads, book]
+        setFutureReads(updatedFutureReads)
+        localStorage.setItem("futureReads"), JSON.stringify(updatedFutureReads)
+        console.log("Added book to Future Reads: ", book)
     }
 
 
@@ -61,6 +88,7 @@ function App() {
                                                                   pastReads={pastReads}
                                                                   addToPastReads={addToPastReads} />}  />
                 <Route path="/pastreads" element={<PastReads books={pastReads}/>}/>
+                <Route path="/futurereads" element={<FutureReads books={futureReads}/>}/>
 
             </Routes>
 
