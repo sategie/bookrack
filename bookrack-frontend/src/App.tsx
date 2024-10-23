@@ -37,7 +37,7 @@ function App() {
         return savedFutureReads ? JSON.parse(savedFutureReads) : []
     }
 
-    const [futureReads, setFutureReads] = useState<Book[]>([])
+    const [futureReads, setFutureReads] = useState<Book[]>(loadFutureReads)
 
 
 
@@ -75,7 +75,7 @@ function App() {
     const addToFutureReads = (book:Book)=> {
         const updatedFutureReads = [...futureReads, book]
         setFutureReads(updatedFutureReads)
-        localStorage.setItem("futureReads"), JSON.stringify(updatedFutureReads)
+        localStorage.setItem("futureReads", JSON.stringify(updatedFutureReads))
         console.log("Added book to Future Reads: ", book)
     }
 
@@ -86,7 +86,9 @@ function App() {
                 <Route path="/allbooks" element={<AllBooks books={books} />}/>
                 <Route path="/allbooks/:id" element={<BookDetails books={books}
                                                                   pastReads={pastReads}
-                                                                  addToPastReads={addToPastReads} />}  />
+                                                                  addToPastReads={addToPastReads}
+                                                                  futureReads={futureReads}
+                                                                  addToFutureReads={addToFutureReads}/>}  />
                 <Route path="/pastreads" element={<PastReads books={pastReads}/>}/>
                 <Route path="/futurereads" element={<FutureReads books={futureReads}/>}/>
 
