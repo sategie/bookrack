@@ -3,10 +3,11 @@ import BookCard from "./BookCard.tsx";
 
 export type PastReadProps={
     books:Book[]
+    removeFromPastReads:(bookId:string) => void
 }
 
 
-export default function PastReads({books}:PastReadProps){
+export default function PastReads({books, removeFromPastReads}:PastReadProps){
     console.log("PastReads: ", books)
 
     return(
@@ -16,7 +17,7 @@ export default function PastReads({books}:PastReadProps){
                 {books.length > 0 ? (
                     <div className="row">
                         {books.map((book) => (
-                            <BookCard key={book.id} book={book}/>
+                            <BookCard key={book.id} book={book} removeFromPastReads={removeFromPastReads}/>
                         ))}
                     </div>
                 ) : (

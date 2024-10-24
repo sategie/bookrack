@@ -18,7 +18,6 @@ function App() {
      * @return {Book[]} - An array of the Book objects (parsed savedPastReads) if it exists,
      * otherwise it returns an empty array
      */
-
     const loadPastReads = (): Book[] => {
         const savedPastReads = localStorage.getItem("pastReads")
         return savedPastReads ? JSON.parse(savedPastReads) : []
@@ -38,10 +37,6 @@ function App() {
     }
 
     const [futureReads, setFutureReads] = useState<Book[]>(loadFutureReads)
-
-
-
-
 
     const fetchBooksData = () => {
         axios.get("/api/books")
@@ -79,6 +74,20 @@ function App() {
         console.log("Added book to Future Reads: ", book)
     }
 
+    const removeFromPastReads = (bookId: string) => {
+        const updatedPastReads = pastReads.filter(book => book.id !== bookId);
+        setPastReads(updatedPastReads);
+        localStorage.setItem("pastReads", JSON.stringify(updatedPastReads));
+        console.log("Removed book from Past Reads:", bookId);
+    };
+
+    const removeFromFutureReads = (bookId: string) => {
+        const updatedFutureReads = futureReads.filter(book => book.id !== bookId);
+        setFutureReads(updatedFutureReads);
+        localStorage.setItem("futureReads", JSON.stringify(updatedFutureReads));
+        console.log("Removed book from Future Reads:", bookId);
+    };
+
 
     return (
         <>
@@ -89,8 +98,10 @@ function App() {
                                                                   addToPastReads={addToPastReads}
                                                                   futureReads={futureReads}
                                                                   addToFutureReads={addToFutureReads}/>}  />
-                <Route path="/pastreads" element={<PastReads books={pastReads}/>}/>
-                <Route path="/futurereads" element={<FutureReads books={futureReads}/>}/>
+                <Route path="/pastreads" element={<PastReads books={pastReads}
+                                                                 removeFromPastReads={removeFromPastReads}/>}/>
+                <Route path="/futurereads" element={<FutureReads books={futureReads}
+                                                                 removeFromFutureReads={removeFromFutureReads}/>}/>
 
             </Routes>
 
