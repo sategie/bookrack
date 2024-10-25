@@ -6,8 +6,11 @@ export type BookCardProps = {
     book: Book;
     onClick?: () => void; // Add onClick as an optional prop
     className?: string; // Add className as an optional prop
+    removeFromPastReads?: (bookId: string) => void; // Add function as an optional prop
+    removeFromFutureReads?: (bookId: string) => void; // Add function as an optional prop
 }
-export default function BookCard({ book, onClick, className}: BookCardProps) {
+export default function BookCard({ book, onClick, className,
+                                     removeFromPastReads, removeFromFutureReads}: BookCardProps) {
 
     /**
      * Handles the keydown event for the BookCard.
@@ -42,6 +45,20 @@ export default function BookCard({ book, onClick, className}: BookCardProps) {
                             <p className="card-text">Author: {book.author}</p>
                             <p className="card-text">Country of Origin: {book.country}</p>
                             <p className="card-text">Year of Publication: {book.year}</p>
+                            {removeFromPastReads && (
+                                <button onClick={() => {
+                                    removeFromPastReads(book.id) }}>
+                                    Remove Book
+                                </button>
+
+                            )}
+                            {removeFromFutureReads && (
+                                <button onClick={() => {
+                                    removeFromFutureReads(book.id)
+                                }}>
+                                    Remove Book
+                                </button>
+                            )}
                         </div>
                     </div>
                     <div className="col-4">
