@@ -4,7 +4,8 @@ import {Book} from "./assets/types/Book.ts";
 import {Route, Routes} from "react-router-dom";
 import axios from "axios";
 import AllBooks from "./components/AllBooks.tsx";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import BookDetails from "./components/BookDetails.tsx";
 import PastReads from "./components/PastReads.tsx";
 import FutureReads from "./components/FutureReads.tsx";
