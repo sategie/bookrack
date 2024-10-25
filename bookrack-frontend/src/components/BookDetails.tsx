@@ -14,7 +14,7 @@ export type BookDetailsProps = {
 };
 
 export default function BookDetails({ books, pastReads, futureReads,
-                                        addToPastReads, addToFutureReads}: BookDetailsProps){
+                                        addToPastReads, addToFutureReads}: Readonly<BookDetailsProps>){
     const { id } = useParams<{id:string}>();
 
     /**

@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import BookDetails from "./components/BookDetails.tsx";
 import PastReads from "./components/PastReads.tsx";
 import FutureReads from "./components/FutureReads.tsx";
+import NavBar from "./components/NavBar.tsx";
 
 function App() {
     const [books, setBooks] = useState<Book[]>([]);
@@ -91,6 +92,7 @@ function App() {
 
     return (
         <>
+            <NavBar/>
             <Routes>
                 <Route path="/allbooks" element={<AllBooks books={books} />}/>
                 <Route path="/allbooks/:id" element={<BookDetails books={books}

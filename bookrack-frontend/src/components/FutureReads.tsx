@@ -7,7 +7,7 @@ export type FutureReadsProps = {
 }
 
 
-export default function FutureReads({books, removeFromFutureReads}: FutureReadsProps){
+export default function FutureReads({books, removeFromFutureReads}: Readonly<FutureReadsProps>){
     console.log("FutureReads: ", books)
 
     return(

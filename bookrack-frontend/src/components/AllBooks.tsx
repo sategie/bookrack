@@ -7,7 +7,7 @@ export type AllBooksProps = {
     books: Book[]
 }
 
-export default function AllBooks({books}: AllBooksProps) {
+export default function AllBooks({books}: Readonly<AllBooksProps>) {
 
     const navigate = useNavigate();
 

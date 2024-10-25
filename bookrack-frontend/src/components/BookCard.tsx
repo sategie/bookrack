@@ -10,7 +10,7 @@ export type BookCardProps = {
     removeFromFutureReads?: (bookId: string) => void; // Add function as an optional prop
 }
 export default function BookCard({ book, onClick, className,
-                                     removeFromPastReads, removeFromFutureReads}: BookCardProps) {
+                                     removeFromPastReads, removeFromFutureReads}: Readonly<BookCardProps>) {
 
     /**
      * Handles the keydown event for the BookCard.
