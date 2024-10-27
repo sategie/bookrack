@@ -14,6 +14,7 @@
 .navLink {
     transition: color 0.3s ease;
     font-weight: bold;
+
 }
 
 .navLink:hover {
