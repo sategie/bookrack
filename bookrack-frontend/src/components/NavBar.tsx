@@ -1,10 +1,12 @@
 import {Link} from "react-router-dom";
+import {Nav} from "react-bootstrap";
+import styles from "../styles/NavBar.module.css";
 
 
 export default function NavBar(){
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <Nav className={`navbar navbar-expand-lg navbar-dark bg-dark ${styles.stickyNav}`}>
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">BookRack</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -25,6 +27,6 @@ export default function NavBar(){
                     </ul>
                 </div>
             </div>
-        </nav>
+        </Nav>
     )
 }
