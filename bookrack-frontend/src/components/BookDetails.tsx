@@ -61,7 +61,7 @@ export default function BookDetails({ books, pastReads, futureReads,
 
 
     return (
-        <div className="container">
+        <div className="container-fluid">
             <h1 className={styles.detailsCard}>Book Details</h1>
             {book ? (
                 <div>

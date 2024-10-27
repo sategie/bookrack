@@ -17,7 +17,7 @@ export default function AllBooks({books}: Readonly<AllBooksProps>) {
 
 
     return (
-        <div className="container">
+        <div className="container-fluid">
             <h1 className = {styles.fixedHeader}>All Books</h1>
             {books.length > 0 ? (
                 <div className={"row"}>

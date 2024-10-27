@@ -13,7 +13,7 @@ export default function FutureReads({books, removeFromFutureReads}: Readonly<Fut
 
     return(
         <>
-            <div className="container">
+            <div className="container-fluid">
                 <h1 className = {styles.fixedHeader}>Future Reads</h1>
                 {books.length > 0 ? (
                     <div className="row">

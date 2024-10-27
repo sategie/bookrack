@@ -5,8 +5,8 @@
 }
 
 .cardImage{
-    height:10rem;
     width:100%;
+    height:10rem;
     object-fit: cover;
 }
 

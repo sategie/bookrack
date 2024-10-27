@@ -13,7 +13,7 @@ export default function PastReads({books, removeFromPastReads}:Readonly<PastRead
 
     return(
         <>
-            <div className="container">
+            <div className="container-fluid">
                 <h1 className = {styles.fixedHeader}>Past Reads</h1>
                 {books.length > 0 ? (
                     <div className="row">
