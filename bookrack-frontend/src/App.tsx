@@ -10,6 +10,7 @@ import BookDetails from "./components/BookDetails.tsx";
 import PastReads from "./components/PastReads.tsx";
 import FutureReads from "./components/FutureReads.tsx";
 import NavBar from "./components/NavBar.tsx";
+import HomePage from "./components/HomePage.tsx";
 
 function App() {
     const [books, setBooks] = useState<Book[]>([]);
@@ -95,6 +96,7 @@ function App() {
         <>
             <NavBar/>
             <Routes>
+                <Route path="/" element={<HomePage />}/>
                 <Route path="/allbooks" element={<AllBooks books={books} />}/>
                 <Route path="/allbooks/:id" element={<BookDetails books={books}
                                                                   pastReads={pastReads}
