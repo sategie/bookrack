@@ -14,7 +14,7 @@ export type BookDetailsProps = {
 };
 
 export default function BookDetails({ books, pastReads, futureReads,
-                                        addToPastReads, addToFutureReads}: BookDetailsProps){
+                                        addToPastReads, addToFutureReads}: Readonly<BookDetailsProps>){
     const { id } = useParams<{id:string}>();
 
     /**
@@ -61,8 +61,8 @@ export default function BookDetails({ books, pastReads, futureReads,
 
 
     return (
-        <div className="container">
-            <h1>Book Details</h1>
+        <div className="container-fluid">
+            <h1 className={styles.detailsCard}>Book Details</h1>
             {book ? (
                 <div>
                     <BookCard book={book} className={styles.detailedCard}/>

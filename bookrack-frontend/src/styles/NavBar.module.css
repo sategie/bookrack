@@ -1,0 +1,27 @@
+.stickyNav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+.navbarBrand {
+    font-size: 1.8rem;
+    color:#90B7E4;
+}
+
+
+.navLink {
+    transition: color 0.3s ease;
+    font-weight: bold;
+
+}
+
+.navLink:hover {
+    color:#90B7E4;
+}
+
+.navItem {
+    margin-left: 5rem;
+    align-items: center;
+}

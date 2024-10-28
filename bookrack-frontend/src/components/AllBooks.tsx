@@ -7,7 +7,7 @@ export type AllBooksProps = {
     books: Book[]
 }
 
-export default function AllBooks({books}: AllBooksProps) {
+export default function AllBooks({books}: Readonly<AllBooksProps>) {
 
     const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ export default function AllBooks({books}: AllBooksProps) {
 
 
     return (
-        <div className="container">
+        <div className="container-fluid">
             <h1 className = {styles.fixedHeader}>All Books</h1>
             {books.length > 0 ? (
                 <div className={"row"}>

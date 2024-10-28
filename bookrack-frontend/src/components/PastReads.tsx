@@ -1,5 +1,6 @@
 import {Book} from "../assets/types/Book.ts";
 import BookCard from "./BookCard.tsx";
+import styles from "../styles/AllBooks.module.css";
 
 export type PastReadProps={
     books:Book[]
@@ -7,13 +8,13 @@ export type PastReadProps={
 }
 
 
-export default function PastReads({books, removeFromPastReads}:PastReadProps){
+export default function PastReads({books, removeFromPastReads}:Readonly<PastReadProps>){
     console.log("PastReads: ", books)
 
     return(
         <>
-            <div className="container">
-                <h1>Past Reads</h1>
+            <div className="container-fluid">
+                <h1 className = {styles.fixedHeader}>Past Reads</h1>
                 {books.length > 0 ? (
                     <div className="row">
                         {books.map((book) => (
