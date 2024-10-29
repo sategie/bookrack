@@ -33,7 +33,8 @@ export default function HomePage({books}:Readonly<HomePageProps>) {
             <blockquote className={styles.quote}>
                 "A room without books is like a body without a soul." - Cicero
             </blockquote>
-            <p className="text-center fw-semibold">Bookrack is a virtual bookshelf where you can store books you have read in the past and books
+            <p className="text-center fw-semibold">Bookrack is a virtual bookshelf where you can store books
+                you have read in the past and books
                 you would like to read in the future.</p>
             <div className={styles.explore}>
                 <button onClick={() => navigate('/allbooks')}>
