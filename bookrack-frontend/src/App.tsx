@@ -96,7 +96,7 @@ function App() {
         <>
             <NavBar/>
             <Routes>
-                <Route path="/" element={<HomePage />}/>
+                <Route path="/" element={<HomePage books={books.slice(0, 5)}/>}/>
                 <Route path="/allbooks" element={<AllBooks books={books} />}/>
                 <Route path="/allbooks/:id" element={<BookDetails books={books}
                                                                   pastReads={pastReads}
