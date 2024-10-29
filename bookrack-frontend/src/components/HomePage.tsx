@@ -1,6 +1,8 @@
 import styles from "../styles/HomePage.module.css";
 import {Book} from "../assets/types/Book.ts";
 import {useEffect, useState} from "react";
+import BookCard from "./BookCard.tsx";
+import {useNavigate} from "react-router-dom";
 
 export type HomePageProps = {
     books: Book[];
@@ -8,6 +10,7 @@ export type HomePageProps = {
 
 export default function HomePage({books}:Readonly<HomePageProps>) {
     const [currentIndex, setCurrentIndex] = useState<number>(0)
+    const navigate = useNavigate()
 
 
 
@@ -30,10 +33,10 @@ export default function HomePage({books}:Readonly<HomePageProps>) {
             <blockquote className={styles.quote}>
                 "A room without books is like a body without a soul." - Cicero
             </blockquote>
-            <p>Bookrack is a virtual bookshelf where you can store books you have read in the past and books
+            <p className="text-center fw-semibold">Bookrack is a virtual bookshelf where you can store books you have read in the past and books
                 you would like to read in the future.</p>
-            <div className={styles.callToAction}>
-                <button onClick={() => window.location.href = '/allbooks'}>
+            <div className={styles.explore}>
+                <button onClick={() => navigate('/allbooks')}>
                     Explore All Books
                 </button>
             </div>
@@ -41,15 +44,9 @@ export default function HomePage({books}:Readonly<HomePageProps>) {
                 <h2 className={styles.featuredBooks}>Featured Books</h2>
                 {books.length > 0 && (
                     <div className={styles.slideshow}>
-                        <img src={currentBook.imageLink}
-                             alt={currentBook.title}
-                             onError={(e) => {
-                                 e.currentTarget.src = 'https://res.cloudinary.com/dvfxz4as6/image/upload/' +
-                                     'v1729108999/' +
-                                     'books/default-book-image_dkbcbd.jpg';
-                             }}/>
-                        <h3>{currentBook.title}</h3>
-                        <p>by {currentBook.author}</p>
+                        <BookCard
+                            book={currentBook}
+                        />
                     </div>
                 )}
             </section>
