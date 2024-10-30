@@ -1,13 +1,13 @@
 import {Book} from "../assets/types/Book.ts";
-import styles from "../styles/AllBooks.module.css";
+import styles from "../styles/BookCard.module.css";
 import React from "react";
 
 export type BookCardProps = {
     book: Book;
-    onClick?: () => void; // Add onClick as an optional prop
-    className?: string; // Add className as an optional prop
-    removeFromPastReads?: (bookId: string) => void; // Add function as an optional prop
-    removeFromFutureReads?: (bookId: string) => void; // Add function as an optional prop
+    onClick?: () => void;
+    className?: string;
+    removeFromPastReads?: (bookId: string) => void;
+    removeFromFutureReads?: (bookId: string) => void;
 }
 export default function BookCard({ book, onClick, className,
                                      removeFromPastReads, removeFromFutureReads}: Readonly<BookCardProps>) {
@@ -34,14 +34,14 @@ export default function BookCard({ book, onClick, className,
              onClick={onClick}
              onKeyDown={handleKeyDown}
              style={{ cursor: 'pointer' }}
-        tabIndex={0} //Ensures the element is focusable when using a keyboard
-        role="button" //Tells assistive technologies that this is an interactive element
+             tabIndex={0}
+             role="button"
         >
             <div className="card h-100">
                 <div className="row g-0">
                     <div className="col-8">
                         <div className="card-body">
-                            <h5 className={`card-title ${styles.bookTitle}`}>{book.title}</h5>
+                            <h5 className={`card-title ${styles.cardTitle}`}>{book.title}</h5>
                             <p className="card-text">Author: {book.author}</p>
                             <p className="card-text">Country of Origin: {book.country}</p>
                             <p className="card-text">Year of Publication: {book.year}</p>
