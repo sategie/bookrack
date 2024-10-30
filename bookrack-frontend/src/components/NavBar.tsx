@@ -29,6 +29,13 @@ export default function NavBar() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <Nav.Item className="nav-item">
+                            <Nav.Link as={Link} to="/" eventKey="/"
+                                      className={`${styles.navLink} ${styles.navItem}`}>
+                                Home
+                            </Nav.Link>
+                        </Nav.Item>
+
+                        <Nav.Item className="nav-item">
                             <Nav.Link as={Link} to="/allbooks" eventKey="/allbooks"
                                       className={`${styles.navLink} ${styles.navItem}`}>
                                 All Books
