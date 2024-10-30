@@ -67,7 +67,7 @@ export default function BookDetails({ books, pastReads, futureReads,
                 <div>
                     <BookCard book={book} className={styles.detailedCard}/>
                     <button onClick={() => handleAddToPastReads(book)}>Add to Past Reads</button>
-                    <button onClick={() => handleAddToFutureReads(book)}>Add to Future Reads</button>
+                    <button className={styles.button} onClick={() => handleAddToFutureReads(book)}>Add to Future Reads</button>
                 </div>
             ) : (
                 <p>Book not found</p>
