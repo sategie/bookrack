@@ -1,11 +1,11 @@
-import styles from "../styles/HomePage.module.css";
-import {Book} from "../assets/types/Book.ts";
-import {useEffect, useState} from "react";
-import BookCard from "./BookCard.tsx";
-import {useNavigate} from "react-router-dom";
+import styles from "../styles/HomePage.module.css"
+import {Book} from "../assets/types/Book.ts"
+import {useEffect, useState} from "react"
+import BookCard from "./BookCard.tsx"
+import {useNavigate} from "react-router-dom"
 
 export type HomePageProps = {
-    books: Book[];
+    books: Book[]
 }
 
 export default function HomePage({books}:Readonly<HomePageProps>) {
@@ -16,7 +16,7 @@ export default function HomePage({books}:Readonly<HomePageProps>) {
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentIndex(prevIndex => (prevIndex + 1) % books.length);
+            setCurrentIndex(prevIndex => (prevIndex + 1) % books.length)
         }, 5000)
 
         return () => clearInterval(timer)

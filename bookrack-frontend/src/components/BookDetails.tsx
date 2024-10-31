@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom';
-import { Book } from '../assets/types/Book.ts';
-import BookCard from './BookCard.tsx';
-import styles from "../styles/BookDetails.module.css";
+import { useParams } from 'react-router-dom'
+import { Book } from '../assets/types/Book.ts'
+import BookCard from './BookCard.tsx'
+import styles from "../styles/BookDetails.module.css"
 
 
 export type BookDetailsProps = {
@@ -10,17 +10,18 @@ export type BookDetailsProps = {
     addToFutureReads:(book:Book) => void
     pastReads:Book[]
     futureReads:Book[]
+    showAlert:(message:string)=>void
 
 };
 
 export default function BookDetails({ books, pastReads, futureReads,
-                                        addToPastReads, addToFutureReads}: Readonly<BookDetailsProps>){
-    const { id } = useParams<{id:string}>();
+                                        addToPastReads, addToFutureReads, showAlert}: Readonly<BookDetailsProps>){
+    const { id } = useParams<{id:string}>()
 
     /**
      * The find method returns the first book in the books array which matches the specified condition
      */
-    const book = books.find(book => book.id === id);
+    const book = books.find(book => book.id === id)
 
 
     /**
@@ -32,12 +33,12 @@ export default function BookDetails({ books, pastReads, futureReads,
      * @param book - The book object which needs to be added to the Past Reads list
      */
     const handleAddToPastReads = (book: Book) => {
-        // Check if the book is already in pastReads
-        const alreadyAdded = pastReads.some(pastReadBook => pastReadBook.id === book.id);
+        const alreadyAdded = pastReads.some(pastReadBook => pastReadBook.id === book.id)
         if (!alreadyAdded) {
-            addToPastReads(book);
+            addToPastReads(book)
+            showAlert("Added to Past Reads")
         } else {
-            console.log("Book is already in Past Reads.");
+            showAlert("Book is already in Past Reads")
         }
     };
 
@@ -51,11 +52,12 @@ export default function BookDetails({ books, pastReads, futureReads,
      */
     const handleAddToFutureReads = (book: Book) => {
         // Check if the book is already in pastReads
-        const alreadyAdded = futureReads.some(futureReadBook => futureReadBook.id === book.id);
+        const alreadyAdded = futureReads.some(futureReadBook => futureReadBook.id === book.id)
         if (!alreadyAdded) {
-            addToFutureReads(book);
+            addToFutureReads(book)
+            showAlert("Added to Future Reads")
         } else {
-            console.log("Book is already in Future Reads.");
+            showAlert("Book is already in Future Reads")
         }
     };
 
@@ -66,8 +68,10 @@ export default function BookDetails({ books, pastReads, futureReads,
             {book ? (
                 <div>
                     <BookCard book={book} className={styles.detailedCard}/>
+
                     <button onClick={() => handleAddToPastReads(book)}>Add to Past Reads</button>
                     <button className={styles.button} onClick={() => handleAddToFutureReads(book)}>Add to Future Reads</button>
+
                 </div>
             ) : (
                 <p>Book not found</p>

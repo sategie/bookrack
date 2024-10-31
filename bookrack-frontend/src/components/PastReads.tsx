@@ -1,6 +1,6 @@
-import {Book} from "../assets/types/Book.ts";
-import BookCard from "./BookCard.tsx";
-import styles from "../styles/AllBooks.module.css";
+import {Book} from "../assets/types/Book.ts"
+import BookCard from "./BookCard.tsx"
+import styles from "../styles/AllBooks.module.css"
 
 export type PastReadProps={
     books:Book[]
@@ -9,7 +9,7 @@ export type PastReadProps={
 
 
 export default function PastReads({books, removeFromPastReads}:Readonly<PastReadProps>){
-    console.log("PastReads: ", books)
+
 
     return(
         <>
