@@ -1,15 +1,15 @@
-import {useEffect, useState} from 'react';
-import { Link, useLocation } from "react-router-dom";
-import { Nav } from "react-bootstrap";
-import styles from "../styles/NavBar.module.css";
+import {useEffect, useState} from 'react'
+import { Link, useLocation } from "react-router-dom"
+import { Nav } from "react-bootstrap"
+import styles from "../styles/NavBar.module.css"
 
 export default function NavBar() {
-    const location = useLocation();
-    const [activeKey, setActiveKey] = useState<string>(location.pathname || "");
+    const location = useLocation()
+    const [activeKey, setActiveKey] = useState<string>(location.pathname || "")
 
     useEffect(() => {
-        setActiveKey(location.pathname || "");
-    }, [location]);
+        setActiveKey(location.pathname || "")
+    }, [location])
 
     return (
         <Nav

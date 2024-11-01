@@ -1,15 +1,15 @@
-import {Book} from "../assets/types/Book.ts";
-import BookCard from "./BookCard.tsx";
-import styles from "../styles/AllBooks.module.css";
+import {Book} from "../assets/types/Book.ts"
+import BookCard from "./BookCard.tsx"
+import styles from "../styles/AllBooks.module.css"
 
 export type FutureReadsProps = {
     books:Book[]
-    removeFromFutureReads?: (bookId: string) => void;
+    removeFromFutureReads?: (bookId: string) => void
 }
 
 
 export default function FutureReads({books, removeFromFutureReads}: Readonly<FutureReadsProps>){
-    console.log("FutureReads: ", books)
+
 
     return(
         <>

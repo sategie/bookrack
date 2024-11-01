@@ -1,13 +1,14 @@
-import {Book} from "../assets/types/Book.ts";
-import styles from "../styles/BookCard.module.css";
-import React from "react";
+import {Book} from "../assets/types/Book.ts"
+import styles from "../styles/BookCard.module.css"
+import React from "react"
+
 
 export type BookCardProps = {
-    book: Book;
-    onClick?: () => void;
-    className?: string;
-    removeFromPastReads?: (bookId: string) => void;
-    removeFromFutureReads?: (bookId: string) => void;
+    book: Book
+    onClick?: () => void
+    className?: string
+    removeFromPastReads?: (bookId: string) => void
+    removeFromFutureReads?: (bookId: string) => void
 }
 export default function BookCard({ book, onClick, className,
                                      removeFromPastReads, removeFromFutureReads}: Readonly<BookCardProps>) {
@@ -25,7 +26,7 @@ export default function BookCard({ book, onClick, className,
      */
     const handleKeyDown = (event: React.KeyboardEvent) => {
         if ((event.key === "Enter" || event.key === "") && onClick) {
-            onClick();
+            onClick()
         }
     }
 
@@ -33,7 +34,7 @@ export default function BookCard({ book, onClick, className,
         <div className={`col-lg-4 col-md-6 col-sm-12 mb-4 ${className}`}
              onClick={onClick}
              onKeyDown={handleKeyDown}
-             style={{ cursor: 'pointer' }}
+             style={onClick ? { cursor: 'pointer' } : {cursor: 'default'}}
              tabIndex={0}
              role="button"
         >
@@ -66,9 +67,11 @@ export default function BookCard({ book, onClick, className,
                             src={book.imageLink}
                             className={`img-fluid ${styles.cardImage}`}
                             alt={book.title}
-                            onError={(e) =>
-                                e.currentTarget.src = 'https://res.cloudinary.com/dvfxz4as6/' +
-                                    'image/upload/v1729108999/books/default-book-image_dkbcbd.jpg'}
+                            onError={(e) => {
+                                e.currentTarget.src = 'https://res.cloudinary.com/dvfxz4as6/image/upload/' +
+                                    'v1730376417/books/default_book_image_ydprpr.webp';
+                                e.currentTarget.className = ` ${styles.defaultBookImage}`
+                            }}
                         />
                     </div>
                 </div>
