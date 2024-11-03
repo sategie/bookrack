@@ -2,7 +2,9 @@ package org.example.bookrackbackend;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -28,16 +30,15 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    @PostMapping()
-    public Book addBook(@RequestBody Book book){
-        return bookService.addBook(book);
+//    @PostMapping()
+//    public Book addBook(@RequestBody Book book){
+//        return bookService.addBook(book);
+//    }
+
+    @PostMapping("/add-book")
+    public Book addBook(@RequestPart Book book, @RequestPart MultipartFile file) throws IOException {
+        return bookService.addBook(book,file);
     }
-
-
-
-
-
-
 
 
 

@@ -1,7 +1,9 @@
 package org.example.bookrackbackend;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -23,7 +25,13 @@ public class BookService {
         return bookRepo.findById(id).orElseThrow();
     }
 
-    public Book addBook(Book book) {
-        return bookRepo.save(book);
+//    public Book addBook(Book book) {
+//        return bookRepo.save(book);
+//    }
+
+    public Book addBook(Book book, MultipartFile file) throws IOException {
+        String imageUrl = cloudinaryService.uploadImage(file);
+        Book bookImage = new Book(book.id(), book.title(), book.author(), book.country(), book.year(), imageUrl);
+        return bookRepo.save(bookImage);
     }
 }
