@@ -11,9 +11,11 @@ import java.util.NoSuchElementException;
 public class BookController {
 
     private final BookService bookService;
+    private CloudinaryService cloudinaryService;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, CloudinaryService cloudinaryService) {
         this.bookService = bookService;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @GetMapping()
@@ -26,14 +28,24 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
+    @PostMapping()
+    public Book addBook(@RequestBody Book book){
+        return bookService.addBook(book);
+    }
+
+
+
+
+
+
+
+
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoSuchElementException.class)
     public ErrorMessage handleNoSuchElementException() {
         return new ErrorMessage("Sorry, the provided ID was not found.");
     }
-
-
-
 
 
 

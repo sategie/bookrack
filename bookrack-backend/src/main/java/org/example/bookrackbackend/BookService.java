@@ -8,8 +8,11 @@ import java.util.List;
 public class BookService {
     private final BookRepo bookRepo;
 
-    public BookService(BookRepo bookRepo) {
+    private final CloudinaryService cloudinaryService;
+
+    public BookService(BookRepo bookRepo, CloudinaryService cloudinaryService) {
         this.bookRepo = bookRepo;
+        this.cloudinaryService = cloudinaryService;
     }
 
     public List<Book> getAllBooks() {
@@ -18,5 +21,9 @@ public class BookService {
 
     public Book getBookById(String id) {
         return bookRepo.findById(id).orElseThrow();
+    }
+
+    public Book addBook(Book book) {
+        return bookRepo.save(book);
     }
 }
