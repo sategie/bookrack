@@ -13,11 +13,9 @@ import java.util.NoSuchElementException;
 public class BookController {
 
     private final BookService bookService;
-    private CloudinaryService cloudinaryService;
 
-    public BookController(BookService bookService, CloudinaryService cloudinaryService) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
-        this.cloudinaryService = cloudinaryService;
     }
 
     @GetMapping()
@@ -29,11 +27,6 @@ public class BookController {
     public Book getBookById(@PathVariable String id){
         return bookService.getBookById(id);
     }
-
-//    @PostMapping()
-//    public Book addBook(@RequestBody Book book){
-//        return bookService.addBook(book);
-//    }
 
     @PostMapping("/add-book")
     public Book addBook(@RequestPart Book book, @RequestPart MultipartFile file) throws IOException {

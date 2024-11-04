@@ -25,9 +25,6 @@ public class BookService {
         return bookRepo.findById(id).orElseThrow();
     }
 
-//    public Book addBook(Book book) {
-//        return bookRepo.save(book);
-//    }
 
     public Book addBook(Book book, MultipartFile file) throws IOException {
         String imageUrl = cloudinaryService.uploadImage(file);
