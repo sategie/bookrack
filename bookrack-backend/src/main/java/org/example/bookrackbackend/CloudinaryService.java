@@ -17,23 +17,10 @@ public class CloudinaryService {
     }
 
     @SuppressWarnings("unchecked")
-    public String uploadImage(MultipartFile file) throws IOException {
-        // Use the default temporary file directory provided by the operating system
-        File fileToUpload = File.createTempFile("upload_", ".tmp");
-        try {
-            // Transfer the incoming file data to the temporary file
-            file.transferTo(fileToUpload);
-
-            // Upload the file to Cloudinary
-            Map<String, Object> response = cloudinary.uploader().upload(fileToUpload, Map.of());
-
-            // Return the URL from the upload response
-            return response.get("url").toString();
-        } finally {
-            // Ensure the temporary file is deleted after uploading
-            if (fileToUpload.exists() && !fileToUpload.delete()) {
-                fileToUpload.deleteOnExit();
-            }
-        }
+    public String uploadImage(MultipartFile image) throws IOException {
+        File fileToUpload = File.createTempFile("file", null);
+        image.transferTo(fileToUpload);
+        Map<String, Object> response = cloudinary.uploader().upload(fileToUpload, Map.of());
+        return response.get("url").toString();
     }
 }
