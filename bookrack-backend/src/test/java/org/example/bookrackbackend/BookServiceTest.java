@@ -62,20 +62,20 @@ public class BookServiceTest {
         Book book = new Book("1", "Things Fall Apart", "Chinua Achebe",
                 "Nigeria", 1958, "");
 
-        MultipartFile file = mock(MultipartFile.class);
+        MultipartFile image = mock(MultipartFile.class);
 
         String imageUrl = "http://example.com/image.jpg";
-        when(mockCloudinaryService.uploadImage(file)).thenReturn(imageUrl);
+        when(mockCloudinaryService.uploadImage(image)).thenReturn(imageUrl);
 
         Book bookWithImage = new Book(book.id(), book.title(), book.author(), book.country(), book.year(), imageUrl);
         when(mockBookRepo.save(bookWithImage)).thenReturn(bookWithImage);
 
-        Book savedBook = bookService.addBook(book, file);
+        Book savedBook = bookService.addBook(book, image);
 
         assertEquals(bookWithImage, savedBook);
 
         verify(mockBookRepo).save(bookWithImage);
-        verify(mockCloudinaryService).uploadImage(file);
+        verify(mockCloudinaryService).uploadImage(image);
 
 
 

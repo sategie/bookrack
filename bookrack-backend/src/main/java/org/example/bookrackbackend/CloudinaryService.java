@@ -16,9 +16,9 @@ public class CloudinaryService {
         this.cloudinary = cloudinary;
     }
 
-    public String uploadImage(MultipartFile file) throws IOException {
+    public String uploadImage(MultipartFile image) throws IOException {
         File fileToUpload = File.createTempFile("file", null);
-        file.transferTo(fileToUpload);
+        image.transferTo(fileToUpload);
         Map response = cloudinary.uploader().upload(fileToUpload, Map.of());
         return response.get("url").toString();
     }
