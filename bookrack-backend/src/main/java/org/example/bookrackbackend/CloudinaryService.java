@@ -17,17 +17,10 @@ public class CloudinaryService {
     }
 
     @SuppressWarnings("unchecked")
-    public String uploadImage(MultipartFile image) {
-        try {
-            File fileToUpload = File.createTempFile("file", null);
-            image.transferTo(fileToUpload);
-            Map<String, Object> response = cloudinary.uploader().upload(fileToUpload, Map.of());
-            return response.get("url").toString();
-        } catch (IOException e) {
-            System.err.println("IOException occurred while uploading the image: " + e.getMessage());
-        } catch (Exception e) {
-            System.err.println("An unexpected error occurred: " + e.getMessage());
-        }
-        return null;
+    public String uploadImage(MultipartFile image) throws IOException {
+        File fileToUpload = File.createTempFile("file", null);
+        image.transferTo(fileToUpload);
+        Map<String, Object> response = cloudinary.uploader().upload(fileToUpload, Map.of());
+        return response.get("url").toString();
     }
 }
