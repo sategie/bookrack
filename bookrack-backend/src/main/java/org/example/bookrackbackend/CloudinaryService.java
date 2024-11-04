@@ -16,10 +16,13 @@ public class CloudinaryService {
         this.cloudinary = cloudinary;
     }
 
+
+
+    @SuppressWarnings("unchecked")
     public String uploadImage(MultipartFile image) throws IOException {
         File fileToUpload = File.createTempFile("file", null);
         image.transferTo(fileToUpload);
-        Map response = cloudinary.uploader().upload(fileToUpload, Map.of());
+        Map<String, Object> response = cloudinary.uploader().upload(fileToUpload, Map.of());
         return response.get("url").toString();
     }
 }
