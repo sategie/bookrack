@@ -15,9 +15,8 @@ public class CloudinaryService {
         this.cloudinary = cloudinary;
     }
 
-    @SuppressWarnings("unchecked")
     public String uploadImage(MultipartFile image) throws IOException {
-        Map<String, Object> response = cloudinary.uploader().upload(image.getBytes(), Map.of());
+        Map response = cloudinary.uploader().upload(image.getBytes(), Map.of());
         return response.get("url").toString();
     }
 }

@@ -29,8 +29,8 @@ public class BookController {
     }
 
     @PostMapping("/add-book")
-    public Book addBook(@RequestPart Book book, @RequestPart MultipartFile file) throws IOException {
-        return bookService.addBook(book,file);
+    public Book addBook(@RequestPart BookCreationDTO bookDTO, @RequestPart MultipartFile image) throws IOException {
+        return bookService.addBook(bookDTO,image);
     }
 
 

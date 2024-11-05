@@ -59,7 +59,7 @@ public class BookServiceTest {
 
     @Test
     void addBook_shouldAddBookToDatabase() throws IOException {
-        Book book = new Book("1", "Things Fall Apart", "Chinua Achebe",
+        BookCreationDTO bookCreationDTO = new BookCreationDTO("Things Fall Apart", "Chinua Achebe",
                 "Nigeria", 1958, "");
 
         MultipartFile image = mock(MultipartFile.class);
@@ -67,10 +67,11 @@ public class BookServiceTest {
         String imageUrl = "http://example.com/image.jpg";
         when(mockCloudinaryService.uploadImage(image)).thenReturn(imageUrl);
 
-        Book bookWithImage = new Book(book.id(), book.title(), book.author(), book.country(), book.year(), imageUrl);
+        Book bookWithImage = new Book(null, bookCreationDTO.title(), bookCreationDTO.author(),
+                bookCreationDTO.country(), bookCreationDTO.year(), imageUrl);
         when(mockBookRepo.save(bookWithImage)).thenReturn(bookWithImage);
 
-        Book savedBook = bookService.addBook(book, image);
+        Book savedBook = bookService.addBook(bookCreationDTO, image);
 
         assertEquals(bookWithImage, savedBook);
 
