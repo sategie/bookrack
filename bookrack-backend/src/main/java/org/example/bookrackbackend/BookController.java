@@ -28,7 +28,7 @@ public class BookController {
         return bookService.getBookById(id);
     }
 
-    @PostMapping("/add-book")
+    @PostMapping()
     public Book addBook(@RequestPart BookCreationDTO bookDTO, @RequestPart MultipartFile image) throws IOException {
         return bookService.addBook(bookDTO,image);
     }
