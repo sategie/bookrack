@@ -1,7 +1,9 @@
 package org.example.bookrackbackend;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -11,7 +13,8 @@ import static org.mockito.Mockito.*;
 
 public class BookServiceTest {
     private final BookRepo mockBookRepo = mock(BookRepo.class);
-    private final BookService bookService = new BookService(mockBookRepo);
+    private final CloudinaryService mockCloudinaryService = mock(CloudinaryService.class);
+    private final BookService bookService = new BookService(mockBookRepo, mockCloudinaryService);
 
 
     @Test
@@ -52,6 +55,35 @@ public class BookServiceTest {
         when(mockBookRepo.findById("1")).thenReturn(Optional.empty());
         assertThrows(NoSuchElementException.class, () -> bookService.getBookById("1"));
         verify(mockBookRepo).findById("1");
+    }
+
+    @Test
+    void addBook_shouldAddBookToDatabase() throws IOException {
+        BookCreationDTO bookCreationDTO = new BookCreationDTO("Things Fall Apart", "Chinua Achebe",
+                "Nigeria", 1958, "");
+
+        MultipartFile image = mock(MultipartFile.class);
+
+        String imageUrl = "http://example.com/image.jpg";
+        when(mockCloudinaryService.uploadImage(image)).thenReturn(imageUrl);
+
+        Book bookWithImage = new Book(null, bookCreationDTO.title(), bookCreationDTO.author(),
+                bookCreationDTO.country(), bookCreationDTO.year(), imageUrl);
+        when(mockBookRepo.save(bookWithImage)).thenReturn(bookWithImage);
+
+        Book savedBook = bookService.addBook(bookCreationDTO, image);
+
+        assertEquals(bookWithImage, savedBook);
+
+        verify(mockBookRepo).save(bookWithImage);
+        verify(mockCloudinaryService).uploadImage(image);
+
+
+
+
+
+
+
     }
 
 
