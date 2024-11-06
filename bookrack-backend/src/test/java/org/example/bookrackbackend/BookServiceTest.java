@@ -60,7 +60,7 @@ public class BookServiceTest {
     @Test
     void addBook_shouldAddBookToDatabase() throws IOException {
         BookCreationDTO bookCreationDTO = new BookCreationDTO("Things Fall Apart", "Chinua Achebe",
-                "Nigeria", 1958, "");
+                "Nigeria", 1958);
 
         MultipartFile image = mock(MultipartFile.class);
 

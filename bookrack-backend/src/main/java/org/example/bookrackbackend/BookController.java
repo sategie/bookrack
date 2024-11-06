@@ -34,13 +34,10 @@ public class BookController {
     }
 
 
-
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoSuchElementException.class)
     public ErrorMessage handleNoSuchElementException() {
         return new ErrorMessage("Sorry, the provided ID was not found.");
     }
-
-
 
 }
