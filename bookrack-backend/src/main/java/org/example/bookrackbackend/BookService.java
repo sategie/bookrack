@@ -28,7 +28,8 @@ public class BookService {
 
     public Book addBook(BookCreationDTO bookDTO, MultipartFile image) throws IOException {
         String imageUrl = cloudinaryService.uploadImage(image);
-        Book bookDTOImage = new Book(null,bookDTO.title(), bookDTO.author(), bookDTO.country(), bookDTO.year(), imageUrl);
-        return bookRepo.save(bookDTOImage);
+        Book bookDTOCloud = new Book(null,bookDTO.title(), bookDTO.author(),
+                bookDTO.country(), bookDTO.year(), imageUrl);
+        return bookRepo.save(bookDTOCloud);
     }
 }

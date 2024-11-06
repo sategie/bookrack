@@ -11,6 +11,8 @@ import PastReads from "./components/PastReads.tsx"
 import FutureReads from "./components/FutureReads.tsx"
 import NavBar from "./components/NavBar.tsx"
 import HomePage from "./components/HomePage.tsx"
+import {BookDTOCloud} from "./assets/types/BookDTOCloud.ts";
+import AddBook from "./components/AddBook.tsx";
 
 function App() {
     const [books, setBooks] = useState<Book[]>([])
@@ -101,6 +103,33 @@ function App() {
     };
 
 
+    const postBookData = async (bookDTOCloud: BookDTOCloud) => {
+        try {
+            const formData = new FormData();
+            formData.append("bookDTO", JSON.stringify({
+                title: bookDTOCloud.title,
+                author: bookDTOCloud.author,
+                country: bookDTOCloud.country,
+                year: bookDTOCloud.year,
+            }));
+            formData.append("image", bookDTOCloud.imageURL);
+
+            const response = await axios.post("/api/books", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            showAlert("Book added successfully!");
+            fetchBooksData();
+
+        } catch (error) {
+            console.error("There was an error adding the book:", error);
+            showAlert("Failed to add book. Please try again.");
+        }
+    };
+
+
     return (
         <>
             <NavBar/>
@@ -127,6 +156,8 @@ function App() {
                 <Route path="/futurereads" element={<FutureReads books={futureReads}
                                                                  removeFromFutureReads={removeFromFutureReads}
                                                                  />}
+                />
+                <Route path="/addbooks" element={<AddBook/>}
                 />
 
             </Routes>
