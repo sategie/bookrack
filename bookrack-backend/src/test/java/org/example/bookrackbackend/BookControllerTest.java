@@ -8,7 +8,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -83,7 +82,7 @@ class BookControllerTest {
     void getBookById_shouldThrowException_whenInvalidIdProvided() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/books/#")).andExpect(status().isNotFound())
                 .andExpect(content().json("""
-                {"message": "Please provide a valid ID."}
+                {"message": "Please check entered URL."}
                 """));
 
     }
