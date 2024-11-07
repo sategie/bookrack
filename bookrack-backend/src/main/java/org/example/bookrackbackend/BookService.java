@@ -1,10 +1,11 @@
 package org.example.bookrackbackend;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+
+import static java.lang.Integer.parseInt;
 
 @Service
 public class BookService {
@@ -26,10 +27,10 @@ public class BookService {
     }
 
 
-    public Book addBook(BookCreationDTO bookDTO, MultipartFile image) throws IOException {
-        String imageUrl = cloudinaryService.uploadImage(image);
+    public Book addBook(BookCreationDTO bookDTO) throws IOException {
+        String imageUrl = cloudinaryService.uploadImage(bookDTO.image());
         Book bookDTOCloud = new Book(null,bookDTO.title(), bookDTO.author(),
-                bookDTO.country(), bookDTO.year(), imageUrl);
+                bookDTO.country(), parseInt(bookDTO.year()), imageUrl);
         return bookRepo.save(bookDTOCloud);
     }
 }

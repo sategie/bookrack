@@ -106,15 +106,19 @@ function App() {
     const postBookData = async (bookDTOCloud: BookDTOCloud) => {
         try {
             const formData = new FormData();
-            formData.append("bookDTO", JSON.stringify({
-                title: bookDTOCloud.title,
-                author: bookDTOCloud.author,
-                country: bookDTOCloud.country,
-                year: bookDTOCloud.year,
-            }));
-            formData.append("image", bookDTOCloud.imageURL);
+            formData.append(
+                "title", bookDTOCloud.title);
+            formData.append(
+                "author", bookDTOCloud.author);
+            formData.append(
+                "country", bookDTOCloud.country);
+            formData.append(
+                "year",bookDTOCloud.year.toString());
 
-            const response = await axios.post("/api/books", formData, {
+            formData.append("file", bookDTOCloud.imageURL);
+
+
+            await axios.post("/api/books", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -157,7 +161,8 @@ function App() {
                                                                  removeFromFutureReads={removeFromFutureReads}
                                                                  />}
                 />
-                <Route path="/addbooks" element={<AddBook/>}
+                <Route path="/addbook" element={<AddBook postBookData={postBookData}
+                                                                 />}
                 />
 
             </Routes>
@@ -169,3 +174,4 @@ function App() {
 }
 
 export default App
+
