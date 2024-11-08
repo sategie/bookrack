@@ -28,7 +28,14 @@ public class BookService {
 
 
     public Book addBook(BookCreationDTO bookDTO) throws IOException {
-        String imageUrl = cloudinaryService.uploadImage(bookDTO.image());
+        String imageUrl;
+
+        if (bookDTO.image().isEmpty()) {
+            imageUrl = "https://res.cloudinary.com/dvfxz4as6/image/upload/v1730376417/books/" +
+                    "default_book_image_ydprpr.webp";
+        } else {
+            imageUrl = cloudinaryService.uploadImage(bookDTO.image());
+        }
         Book bookDTOCloud = new Book(null,bookDTO.title(), bookDTO.author(),
                 bookDTO.country(), parseInt(bookDTO.year()), imageUrl);
         return bookRepo.save(bookDTOCloud);

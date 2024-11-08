@@ -117,7 +117,6 @@ function App() {
 
             formData.append("file", bookDTOCloud.imageURL);
 
-
             await axios.post("/api/books", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
