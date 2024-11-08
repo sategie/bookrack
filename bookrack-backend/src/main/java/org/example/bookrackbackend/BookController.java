@@ -29,10 +29,13 @@ public class BookController {
     }
 
     @PostMapping()
-    public Book addBook(@RequestPart BookCreationDTO bookDTO, @RequestPart MultipartFile image) throws IOException {
-        return bookService.addBook(bookDTO,image);
+    public Book addBook(@RequestParam("file") MultipartFile image,@RequestParam("title") String title,
+                        @RequestParam("author") String author,
+                          @RequestParam("country") String country, @RequestParam("year")
+                            String year) throws IOException {
+        BookCreationDTO bookDTO = new BookCreationDTO(title, author, country, year, image);
+        return bookService.addBook(bookDTO);
     }
-
 
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -41,6 +44,6 @@ public class BookController {
         return new ErrorMessage("Sorry, the provided ID was not found.");
     }
 
-
-
 }
+
+

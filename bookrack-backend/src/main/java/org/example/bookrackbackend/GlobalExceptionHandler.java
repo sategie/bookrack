@@ -7,11 +7,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @ResponseStatus(HttpStatus.NOT_FOUND)
-
 public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
 
     public ErrorMessage handleGlobalException() {
-        return new ErrorMessage("Please provide a valid ID.");
+        return new ErrorMessage("Please check entered URL.");
     }
 }

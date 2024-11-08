@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import static java.lang.Integer.parseInt;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -59,24 +60,40 @@ public class BookServiceTest {
 
     @Test
     void addBook_shouldAddBookToDatabase() throws IOException {
-        BookCreationDTO bookCreationDTO = new BookCreationDTO("Things Fall Apart", "Chinua Achebe",
-                "Nigeria", 1958, "");
-
         MultipartFile image = mock(MultipartFile.class);
+        BookCreationDTO bookCreationDTO = new BookCreationDTO(
+                "Things Fall Apart",
+                "Chinua Achebe",
+                "Nigeria",
+                "1958",
+                image
+        );
 
         String imageUrl = "http://example.com/image.jpg";
         when(mockCloudinaryService.uploadImage(image)).thenReturn(imageUrl);
 
-        Book bookWithImage = new Book(null, bookCreationDTO.title(), bookCreationDTO.author(),
-                bookCreationDTO.country(), bookCreationDTO.year(), imageUrl);
-        when(mockBookRepo.save(bookWithImage)).thenReturn(bookWithImage);
+        Book expectedSavedBook = new Book(
+                null,
+                bookCreationDTO.title(),
+                bookCreationDTO.author(),
+                bookCreationDTO.country(),
+                parseInt(bookCreationDTO.year()),
+                imageUrl
+        );
 
-        Book savedBook = bookService.addBook(bookCreationDTO, image);
+        when(mockBookRepo.save(any(Book.class))).thenReturn(expectedSavedBook);
 
-        assertEquals(bookWithImage, savedBook);
+        Book actualSavedBook = bookService.addBook(bookCreationDTO);
 
-        verify(mockBookRepo).save(bookWithImage);
+        assertEquals(expectedSavedBook, actualSavedBook);
         verify(mockCloudinaryService).uploadImage(image);
+        verify(mockBookRepo).save(any(Book.class));
+
+
+
+
+
+
 
 
 
