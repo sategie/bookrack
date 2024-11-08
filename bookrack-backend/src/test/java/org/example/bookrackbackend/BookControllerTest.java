@@ -1,13 +1,23 @@
 package org.example.bookrackbackend;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.Uploader;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Map;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -20,6 +30,13 @@ class BookControllerTest {
 
     @Autowired
     private BookRepo bookRepo;
+
+    @MockBean
+    Cloudinary cloudinary;
+
+    Uploader uploader = mock(Uploader.class);
+
+
 
     @DirtiesContext
     @Test
@@ -85,5 +102,26 @@ class BookControllerTest {
                 {"message": "Please check entered URL."}
                 """));
 
+    }
+
+    @DirtiesContext
+    @Test
+    void addBook_shouldReturnSuccess_whenAllFieldsAreProvided() throws Exception {
+        when(cloudinary.uploader()).thenReturn(uploader);
+        when(uploader.upload(any(), any())).thenReturn(Map.of("url", "test"));
+
+        MockMultipartFile image = new MockMultipartFile(
+                "file",
+                "test.jpg",
+                "image/jpeg",
+                "Test Image Content".getBytes()
+        );
+        mockMvc.perform(multipart("/api/books")
+                        .file(image)
+                        .param("title", "Valid Title")
+                        .param("author", "Valid Author")
+                        .param("country", "Valid Country")
+                        .param("year", "2021"))
+                .andExpect(status().isOk());
     }
 }
