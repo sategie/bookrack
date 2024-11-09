@@ -11,11 +11,14 @@ export type BookDetailsProps = {
     pastReads:Book[]
     futureReads:Book[]
     showAlert:(message:string)=>void
+    deleteBook:(id:string) => void
 
 };
 
 export default function BookDetails({ books, pastReads, futureReads,
-                                        addToPastReads, addToFutureReads, showAlert}: Readonly<BookDetailsProps>){
+                                        addToPastReads, addToFutureReads, showAlert, deleteBook}:
+                                        Readonly<BookDetailsProps>)
+{
     const { id } = useParams<{id:string}>()
 
     /**
@@ -61,6 +64,12 @@ export default function BookDetails({ books, pastReads, futureReads,
         }
     };
 
+    const handleDeleteBook = () => {
+        if (book && window.confirm("Are you sure you want to delete this book?")) {
+            deleteBook(book.id);
+        }
+    };
+
 
     return (
         <div className="container-fluid">
@@ -70,7 +79,10 @@ export default function BookDetails({ books, pastReads, futureReads,
                     <BookCard book={book} className={styles.detailedCard}/>
 
                     <button onClick={() => handleAddToPastReads(book)}>Add to Past Reads</button>
-                    <button className={styles.button} onClick={() => handleAddToFutureReads(book)}>Add to Future Reads</button>
+                    <button className={styles.button} onClick={() => handleAddToFutureReads(book)}>
+                        Add to Future Reads
+                    </button>
+                    <button className={styles.button} onClick={handleDeleteBook}>Delete Book</button>
 
                 </div>
             ) : (
