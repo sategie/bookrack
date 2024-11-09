@@ -37,6 +37,11 @@ public class BookController {
         return bookService.addBook(bookDTO);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteBookById(@PathVariable String id) {
+        bookService.deleteBookById(id);
+    }
+
 
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
