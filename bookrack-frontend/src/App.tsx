@@ -141,6 +141,12 @@ function App() {
             showAlert("Book deleted successfully!");
 
             setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId));
+            setPastReads(prevPastReads => prevPastReads.filter(book => book.id !== bookId));
+            setFutureReads(prevFutureReads => prevFutureReads.filter(book => book.id !== bookId));
+
+            localStorage.setItem("pastReads", JSON.stringify(pastReads.filter(book => book.id !== bookId)));
+            localStorage.setItem("futureReads", JSON.stringify(futureReads.filter(book => book.id !== bookId)));
+
         } catch (error) {
             if (axios.isAxiosError(error) && error.response) {
                 showAlert(error.response.data.message);
