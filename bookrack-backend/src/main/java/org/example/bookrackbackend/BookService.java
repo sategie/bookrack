@@ -28,6 +28,15 @@ public class BookService {
 
 
     public Book addBook(BookCreationDTO bookDTO) throws IOException {
+
+        List<Book> allBooks = getAllBooks();
+        for (Book book : allBooks) {
+            if (book.title().equalsIgnoreCase(bookDTO.title()) &&
+                    book.author().equalsIgnoreCase(bookDTO.author())) {
+                throw new IllegalArgumentException("A book with the same title and author already exists.");
+            }
+        }
+
         String imageUrl;
 
         if (bookDTO.image().isEmpty()) {

@@ -114,7 +114,6 @@ function App() {
                 "country", bookDTOCloud.country);
             formData.append(
                 "year",bookDTOCloud.year.toString());
-
             formData.append("file", bookDTOCloud.imageURL);
 
             await axios.post("/api/books", formData, {
@@ -127,8 +126,12 @@ function App() {
             fetchBooksData();
 
         } catch (error) {
-            console.error("There was an error adding the book:", error);
-            showAlert("Failed to add book. Please try again.");
+            if (axios.isAxiosError(error) && error.response) {
+                showAlert(error.response.data.message);
+            } else {
+                console.error("There was an error adding the book:", error);
+                showAlert("Failed to add book. Please try again.");
+            }
         }
     };
 

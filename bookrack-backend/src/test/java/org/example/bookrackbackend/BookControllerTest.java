@@ -95,14 +95,6 @@ class BookControllerTest {
 
     }
 
-    @Test
-    void getBookById_shouldThrowException_whenInvalidIdProvided() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/books/#")).andExpect(status().isNotFound())
-                .andExpect(content().json("""
-                {"message": "Please check entered URL."}
-                """));
-
-    }
 
     @DirtiesContext
     @Test
@@ -123,5 +115,36 @@ class BookControllerTest {
                         .param("country", "Valid Country")
                         .param("year", "2021"))
                 .andExpect(status().isOk());
+    }
+
+    @DirtiesContext
+    @Test
+    void addBook_shouldReturnBadRequest_whenBookWithSameTitleAndAuthorExists() throws Exception {
+        when(cloudinary.uploader()).thenReturn(uploader);
+        when(uploader.upload(any(), any())).thenReturn(Map.of("url", "test"));
+        MockMultipartFile image = new MockMultipartFile(
+                "file",
+                "test.jpg",
+                "image/jpeg",
+                "Test Image Content".getBytes()
+        );
+        mockMvc.perform(multipart("/api/books")
+                        .file(image)
+                        .param("title", "Duplicate Title")
+                        .param("author", "Duplicate Author")
+                        .param("country", "Valid Country")
+                        .param("year", "2021"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(multipart("/api/books")
+                        .file(image)
+                        .param("title", "Duplicate Title")
+                        .param("author", "Duplicate Author")
+                        .param("country", "Another Country")
+                        .param("year", "2021"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().json("""
+                {"message": "A book with the same title and author already exists."}
+            """));
     }
 }

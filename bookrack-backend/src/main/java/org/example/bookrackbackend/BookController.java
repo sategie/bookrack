@@ -38,10 +38,17 @@ public class BookController {
     }
 
 
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoSuchElementException.class)
     public ErrorMessage handleNoSuchElementException() {
         return new ErrorMessage("Sorry, the provided ID was not found.");
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ErrorMessage handleIllegalArgumentException(IllegalArgumentException e) {
+        return new ErrorMessage(e.getMessage());
     }
 
 }
