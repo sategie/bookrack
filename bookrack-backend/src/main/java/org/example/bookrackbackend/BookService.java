@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static java.lang.Integer.parseInt;
 
@@ -48,5 +49,12 @@ public class BookService {
         Book bookDTOCloud = new Book(null,bookDTO.title(), bookDTO.author(),
                 bookDTO.country(), parseInt(bookDTO.year()), imageUrl);
         return bookRepo.save(bookDTOCloud);
+    }
+
+    public void deleteBookById(String id) {
+        if (!bookRepo.existsById(id)) {
+            throw new NoSuchElementException("No book found with the provided ID.");
+        }
+        bookRepo.deleteById(id);
     }
 }

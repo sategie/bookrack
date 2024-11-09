@@ -147,4 +147,24 @@ class BookControllerTest {
                 {"message": "A book with the same title and author already exists."}
             """));
     }
+
+    @DirtiesContext
+    @Test
+    void deleteBookById_shouldReturnSuccess_whenBookExists() throws Exception {
+        Book book = new Book("1", "Things Fall Apart", "Chinua Achebe", "Nigeria", 1958,
+                "images/things-fall-apart.jpg");
+        bookRepo.save(book);
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/books/1"))
+                .andExpect(status().isOk());
+    }
+
+    @DirtiesContext
+    @Test
+    void deleteBookById_shouldThrowException_whenIdNotFound() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/books/2"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().json("""
+                {"message": "Sorry, the provided ID was not found."}
+                """));
+    }
 }

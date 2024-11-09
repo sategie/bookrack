@@ -157,6 +157,27 @@ public class BookServiceTest {
         verify(mockBookRepo).save(any(Book.class));
     }
 
+    @Test
+    void deleteBookById_shouldDeleteBook_ifBookExists() {
+        String bookId = "1";
+
+        when(mockBookRepo.existsById(bookId)).thenReturn(true);
+
+        bookService.deleteBookById(bookId);
+
+        verify(mockBookRepo).deleteById(bookId);
+    }
+
+    @Test
+    void deleteBookById_shouldThrowException_ifBookDoesNotExist() {
+        String nonExistentBookId = "nonExistentId";
+
+        when(mockBookRepo.existsById(nonExistentBookId)).thenReturn(false);
+
+        assertThrows(NoSuchElementException.class, () -> bookService.deleteBookById(nonExistentBookId));
+        verify(mockBookRepo, never()).deleteById(anyString());
+    }
+
 
 
 
