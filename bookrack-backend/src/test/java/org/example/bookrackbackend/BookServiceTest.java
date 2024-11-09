@@ -90,18 +90,74 @@ public class BookServiceTest {
         verify(mockBookRepo).save(any(Book.class));
 
 
-
-
-
-
-
-
-
-
-
-
-
     }
+
+    @Test
+    void addBook_shouldSetCorrectImageURL_whenImageIsProvided() throws IOException {
+        MultipartFile image = mock(MultipartFile.class);
+        BookCreationDTO bookCreationDTO = new BookCreationDTO(
+                "Things Fall Apart",
+                "Chinua Achebe",
+                "Nigeria",
+                "1958",
+                image
+        );
+
+        String expectedImageUrl = "http://example.com/image.jpg";
+        when(mockCloudinaryService.uploadImage(image)).thenReturn(expectedImageUrl);
+
+        Book expectedSavedBook = new Book(
+                null,
+                bookCreationDTO.title(),
+                bookCreationDTO.author(),
+                bookCreationDTO.country(),
+                parseInt(bookCreationDTO.year()),
+                expectedImageUrl
+        );
+
+        when(mockBookRepo.save(any(Book.class))).thenReturn(expectedSavedBook);
+
+        Book actualSavedBook = bookService.addBook(bookCreationDTO);
+
+        assertEquals(expectedImageUrl, actualSavedBook.imageLink());
+        verify(mockCloudinaryService).uploadImage(image);
+        verify(mockBookRepo).save(any(Book.class));
+    }
+
+    @Test
+    void addBook_shouldUseDefaultImageURL_whenNoImageIsProvided() throws IOException {
+        MultipartFile image = mock(MultipartFile.class);
+        when(image.isEmpty()).thenReturn(true);
+
+        BookCreationDTO bookCreationDTO = new BookCreationDTO(
+                "Things Fall Apart",
+                "Chinua Achebe",
+                "Nigeria",
+                "1958",
+                image
+        );
+
+        String defaultImageUrl = "https://res.cloudinary.com/dvfxz4as6/image/upload/v1730376417/" +
+                "books/default_book_image_ydprpr.webp";
+
+        Book expectedSavedBook = new Book(
+                null,
+                bookCreationDTO.title(),
+                bookCreationDTO.author(),
+                bookCreationDTO.country(),
+                parseInt(bookCreationDTO.year()),
+                defaultImageUrl
+        );
+
+        when(mockBookRepo.save(any(Book.class))).thenReturn(expectedSavedBook);
+
+        Book actualSavedBook = bookService.addBook(bookCreationDTO);
+
+        assertEquals(defaultImageUrl, actualSavedBook.imageLink());
+        verify(mockBookRepo).save(any(Book.class));
+    }
+
+
 
 
 }

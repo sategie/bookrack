@@ -66,7 +66,7 @@ export default function BookDetails({ books, pastReads, futureReads,
         <div className="container-fluid">
             <h1 className={styles.detailsCard}>Book Details</h1>
             {book ? (
-                <div>
+                <div className={styles.centerContainer}>
                     <BookCard book={book} className={styles.detailedCard}/>
 
                     <button onClick={() => handleAddToPastReads(book)}>Add to Past Reads</button>

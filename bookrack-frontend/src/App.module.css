@@ -20,17 +20,17 @@ html {
 }
 
 button {
-  background-color: #007bff; /* Bootstrap primary color */
+  background-color: #007bff;
   color: #fff;
-  border: none; /* Remove default border */
-  border-radius: 4px; /* Slightly rounded corners */
-  padding: 0.5rem 1rem; /* Padding inside button */
-  font-size: 1rem; /* Text size in button */
-  cursor: pointer; /* Changes cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth transition on hover */
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 button:hover {
-  background-color: #0056b3; /* Darken the background on hover */
+  background-color: #0056b3;
 }
 
 

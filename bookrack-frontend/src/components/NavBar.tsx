@@ -55,6 +55,12 @@ export default function NavBar() {
                                 Future Reads
                             </Nav.Link>
                         </Nav.Item>
+                        <Nav.Item className="nav-item">
+                            <Nav.Link as={Link} to="/addbook" eventKey="/addbook"
+                                      className={`${styles.navLink} ${styles.navItem}`}>
+                                Add Book
+                            </Nav.Link>
+                        </Nav.Item>
                     </ul>
                 </div>
             </div>

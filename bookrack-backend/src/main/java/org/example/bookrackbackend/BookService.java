@@ -28,7 +28,23 @@ public class BookService {
 
 
     public Book addBook(BookCreationDTO bookDTO) throws IOException {
-        String imageUrl = cloudinaryService.uploadImage(bookDTO.image());
+
+        List<Book> allBooks = getAllBooks();
+        for (Book book : allBooks) {
+            if (book.title().equalsIgnoreCase(bookDTO.title()) &&
+                    book.author().equalsIgnoreCase(bookDTO.author())) {
+                throw new IllegalArgumentException("A book with the same title and author already exists.");
+            }
+        }
+
+        String imageUrl;
+
+        if (bookDTO.image().isEmpty()) {
+            imageUrl = "https://res.cloudinary.com/dvfxz4as6/image/upload/v1730376417/books/" +
+                    "default_book_image_ydprpr.webp";
+        } else {
+            imageUrl = cloudinaryService.uploadImage(bookDTO.image());
+        }
         Book bookDTOCloud = new Book(null,bookDTO.title(), bookDTO.author(),
                 bookDTO.country(), parseInt(bookDTO.year()), imageUrl);
         return bookRepo.save(bookDTOCloud);
