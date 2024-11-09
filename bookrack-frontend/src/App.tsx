@@ -135,6 +135,22 @@ function App() {
         }
     };
 
+    const deleteBook = async (bookId: string) => {
+        try {
+            await axios.delete(`/api/books/${bookId}`);
+            showAlert("Book deleted successfully!");
+
+            setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId));
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                showAlert(error.response.data.message);
+            } else {
+                console.error("There was an error deleting the book:", error);
+                showAlert("Failed to delete book. Please try again.");
+            }
+        }
+    };
+
 
     return (
         <>
@@ -153,6 +169,7 @@ function App() {
                                                                   futureReads={futureReads}
                                                                   addToFutureReads={addToFutureReads}
                                                                   showAlert={showAlert}
+                                                                  deleteBook={deleteBook}
                                                                 />}
                 />
                 <Route path="/pastreads" element={<PastReads books={pastReads}
