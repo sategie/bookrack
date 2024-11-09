@@ -15,6 +15,8 @@ export default function AddBook({postBookData}: Readonly<AddBookProps>) {
         imageURL: new File([], ''),
     });
 
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setBookData(bookData => ({...bookData, [name]: value}));
@@ -26,6 +28,16 @@ export default function AddBook({postBookData}: Readonly<AddBookProps>) {
             ...bookData,
             imageURL: file,
         }));
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            setImagePreview(null);
+        }
     };
 
 
@@ -93,6 +105,10 @@ export default function AddBook({postBookData}: Readonly<AddBookProps>) {
                         name="imageURL"
                         onChange={handleFileChange}
                     />
+                    {imagePreview && (
+                        <img src={imagePreview} alt="Image Preview"
+                             style={{ width: '10rem', height: 'auto', marginTop: '1rem' }} />
+                    )}
                 </label>
             </div>
             <button type="submit" className={styles.button}>Add Book</button>
