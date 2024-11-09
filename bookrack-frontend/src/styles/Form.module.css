@@ -1,0 +1,27 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    margin: 0 auto;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    color: #0B0909;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+    margin-top: 0.5rem;
+    padding: 0.8rem;
+    border: 0.1rem solid #cccccc;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}

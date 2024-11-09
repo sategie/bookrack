@@ -1,5 +1,6 @@
 import {BookDTOCloud} from "../assets/types/BookDTOCloud.ts";
 import React, {useState} from "react";
+import styles from "../styles/Form.module.css"
 
 export type AddBookProps= {
     postBookData: (bookDTOCloud: BookDTOCloud) => void;
@@ -34,8 +35,9 @@ export default function AddBook({postBookData}: Readonly<AddBookProps>) {
     }
 
 
-    return(
-            <form onSubmit={handleSubmit}>
+    return (
+        <form onSubmit={handleSubmit} className={styles.formContainer}>
+            <div className={styles.formGroup}>
                 <label>
                     Title:
                     <input
@@ -46,6 +48,8 @@ export default function AddBook({postBookData}: Readonly<AddBookProps>) {
                         required
                     />
                 </label>
+            </div>
+            <div className={styles.formGroup}>
                 <label>
                     Author:
                     <input
@@ -56,6 +60,8 @@ export default function AddBook({postBookData}: Readonly<AddBookProps>) {
                         required
                     />
                 </label>
+            </div>
+            <div className={styles.formGroup}>
                 <label>
                     Country:
                     <input
@@ -66,6 +72,8 @@ export default function AddBook({postBookData}: Readonly<AddBookProps>) {
                         required
                     />
                 </label>
+            </div>
+            <div className={styles.formGroup}>
                 <label>
                     Year:
                     <input
@@ -76,6 +84,8 @@ export default function AddBook({postBookData}: Readonly<AddBookProps>) {
                         required
                     />
                 </label>
+            </div>
+            <div className={styles.formGroup}>
                 <label>
                     Image:
                     <input
@@ -84,7 +94,8 @@ export default function AddBook({postBookData}: Readonly<AddBookProps>) {
                         onChange={handleFileChange}
                     />
                 </label>
-                <button type="submit">Add Book</button>
-            </form>
+            </div>
+            <button type="submit" className={styles.button}>Add Book</button>
+        </form>
     )
 }
