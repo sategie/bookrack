@@ -82,7 +82,7 @@ export default function BookDetails({ books, pastReads, futureReads,
                     <button className={styles.button} onClick={() => handleAddToFutureReads(book)}>
                         Add to Future Reads
                     </button>
-                    <button className={styles.button} onClick={handleDeleteBook}>Delete Book</button>
+                    <button className={styles.deleteButton} onClick={handleDeleteBook}>Delete Book</button>
 
                 </div>
             ) : (
