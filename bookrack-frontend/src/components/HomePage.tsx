@@ -52,5 +52,5 @@ export default function HomePage({books}:Readonly<HomePageProps>) {
                 )}
             </section>
         </div>
-    );
+    )
 }
