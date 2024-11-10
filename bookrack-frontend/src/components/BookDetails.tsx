@@ -13,7 +13,7 @@ export type BookDetailsProps = {
     showAlert:(message:string)=>void
     deleteBook:(id:string) => void
 
-};
+}
 
 export default function BookDetails({ books, pastReads, futureReads,
                                         addToPastReads, addToFutureReads, showAlert, deleteBook}:
@@ -43,7 +43,7 @@ export default function BookDetails({ books, pastReads, futureReads,
         } else {
             showAlert("Book is already in Past Reads")
         }
-    };
+    }
 
     /**
      * Prevents adding duplicate entries in the Future Reads list
@@ -62,13 +62,13 @@ export default function BookDetails({ books, pastReads, futureReads,
         } else {
             showAlert("Book is already in Future Reads")
         }
-    };
+    }
 
     const handleDeleteBook = () => {
         if (book && window.confirm("Are you sure you want to delete this book?")) {
-            deleteBook(book.id);
+            deleteBook(book.id)
         }
-    };
+    }
 
 
     return (
@@ -82,7 +82,7 @@ export default function BookDetails({ books, pastReads, futureReads,
                     <button className={styles.button} onClick={() => handleAddToFutureReads(book)}>
                         Add to Future Reads
                     </button>
-                    <button className={styles.button} onClick={handleDeleteBook}>Delete Book</button>
+                    <button className={styles.deleteButton} onClick={handleDeleteBook}>Delete Book</button>
 
                 </div>
             ) : (
@@ -91,5 +91,5 @@ export default function BookDetails({ books, pastReads, futureReads,
 
 
         </div>
-    );
-};
+    )
+}

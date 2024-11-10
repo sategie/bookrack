@@ -21,7 +21,8 @@ export default function NavBar() {
             <div className="container-fluid">
                 <Link className={`navbar-brand ${styles.navbarBrand}`} to="/">BookRack</Link>
 
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                <button className={`navbar-toggler ${styles.hamburger}`} type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -65,5 +66,5 @@ export default function NavBar() {
                 </div>
             </div>
         </Nav>
-    );
+    )
 }

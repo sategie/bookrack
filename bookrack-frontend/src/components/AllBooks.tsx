@@ -1,7 +1,7 @@
-import {Book} from "../assets/types/Book.ts";
-import styles from "../styles/AllBooks.module.css";
-import BookCard from "./BookCard.tsx";
-import {useNavigate} from "react-router-dom";
+import {Book} from "../assets/types/Book.ts"
+import styles from "../styles/AllBooks.module.css"
+import BookCard from "./BookCard.tsx"
+import {useNavigate} from "react-router-dom"
 
 export type AllBooksProps = {
     books: Book[]
@@ -9,10 +9,10 @@ export type AllBooksProps = {
 
 export default function AllBooks({books}: Readonly<AllBooksProps>) {
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const handleBookClick = (id:string) => {
-        navigate(`/allbooks/${id}`);
+        navigate(`/allbooks/${id}`)
     }
 
 

@@ -69,7 +69,7 @@ export default function BookCard({ book, onClick, className,
                             alt={book.title}
                             onError={(e) => {
                                 e.currentTarget.src = 'https://res.cloudinary.com/dvfxz4as6/image/upload/' +
-                                    'v1730376417/books/default_book_image_ydprpr.webp';
+                                    'v1730376417/books/default_book_image_ydprpr.webp'
                                 e.currentTarget.className = ` ${styles.defaultBookImage}`
                             }}
                         />

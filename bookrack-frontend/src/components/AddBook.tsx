@@ -1,9 +1,9 @@
-import {BookDTOCloud} from "../assets/types/BookDTOCloud.ts";
-import React, {useState} from "react";
+import {BookDTOCloud} from "../assets/types/BookDTOCloud.ts"
+import React, {useState} from "react"
 import styles from "../styles/Form.module.css"
 
 export type AddBookProps= {
-    postBookData: (bookDTOCloud: BookDTOCloud) => void;
+    postBookData: (bookDTOCloud: BookDTOCloud) => void
 }
 
 export default function AddBook({postBookData}: Readonly<AddBookProps>) {
@@ -13,37 +13,37 @@ export default function AddBook({postBookData}: Readonly<AddBookProps>) {
         country: '',
         year: new Date().getFullYear(),
         imageURL: new File([], ''),
-    });
+    })
 
-    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [imagePreview, setImagePreview] = useState<string | null>(null)
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setBookData(bookData => ({...bookData, [name]: value}));
+        const { name, value } = event.target
+        setBookData(bookData => ({...bookData, [name]: value}))
     }
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files ? event.target.files[0] : new File([], '');
+        const file = event.target.files ? event.target.files[0] : new File([], '')
         setBookData(bookData => ({
             ...bookData,
             imageURL: file,
-        }));
+        }))
 
         if (file) {
-            const reader = new FileReader();
+            const reader = new FileReader()
             reader.onloadend = () => {
-                setImagePreview(reader.result as string);
-            };
-            reader.readAsDataURL(file);
+                setImagePreview(reader.result as string)
+            }
+            reader.readAsDataURL(file)
         } else {
-            setImagePreview(null);
+            setImagePreview(null)
         }
-    };
+    }
 
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        postBookData(bookData);
+        event.preventDefault()
+        postBookData(bookData)
     }
 
 

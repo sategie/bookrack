@@ -11,8 +11,8 @@ import PastReads from "./components/PastReads.tsx"
 import FutureReads from "./components/FutureReads.tsx"
 import NavBar from "./components/NavBar.tsx"
 import HomePage from "./components/HomePage.tsx"
-import {BookDTOCloud} from "./assets/types/BookDTOCloud.ts";
-import AddBook from "./components/AddBook.tsx";
+import {BookDTOCloud} from "./assets/types/BookDTOCloud.ts"
+import AddBook from "./components/AddBook.tsx"
 
 function App() {
     const [books, setBooks] = useState<Book[]>([])
@@ -89,67 +89,73 @@ function App() {
     }
 
     const removeFromPastReads = (bookId: string) => {
-        const updatedPastReads = pastReads.filter(book => book.id !== bookId);
-        setPastReads(updatedPastReads);
+        const updatedPastReads = pastReads.filter(book => book.id !== bookId)
+        setPastReads(updatedPastReads)
         localStorage.setItem("pastReads", JSON.stringify(updatedPastReads))
         showAlert("Removed from Past Reads")
-    };
+    }
 
     const removeFromFutureReads = (bookId: string) => {
         const updatedFutureReads = futureReads.filter(book => book.id !== bookId)
-        setFutureReads(updatedFutureReads);
+        setFutureReads(updatedFutureReads)
         localStorage.setItem("futureReads", JSON.stringify(updatedFutureReads))
         showAlert("Removed from Future Reads")
-    };
+    }
 
 
     const postBookData = async (bookDTOCloud: BookDTOCloud) => {
         try {
-            const formData = new FormData();
+            const formData = new FormData()
             formData.append(
-                "title", bookDTOCloud.title);
+                "title", bookDTOCloud.title)
             formData.append(
-                "author", bookDTOCloud.author);
+                "author", bookDTOCloud.author)
             formData.append(
-                "country", bookDTOCloud.country);
+                "country", bookDTOCloud.country)
             formData.append(
-                "year",bookDTOCloud.year.toString());
-            formData.append("file", bookDTOCloud.imageURL);
+                "year",bookDTOCloud.year.toString())
+            formData.append("file", bookDTOCloud.imageURL)
 
             await axios.post("/api/books", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            });
+            })
 
-            showAlert("Book added successfully!");
-            fetchBooksData();
+            showAlert("Book added successfully!")
+            fetchBooksData()
 
         } catch (error) {
             if (axios.isAxiosError(error) && error.response) {
-                showAlert(error.response.data.message);
+                showAlert(error.response.data.message)
             } else {
-                console.error("There was an error adding the book:", error);
-                showAlert("Failed to add book. Please try again.");
+                console.error("There was an error adding the book:", error)
+                showAlert("Failed to add book. Please try again.")
             }
         }
-    };
+    }
 
     const deleteBook = async (bookId: string) => {
         try {
-            await axios.delete(`/api/books/${bookId}`);
-            showAlert("Book deleted successfully!");
+            await axios.delete(`/api/books/${bookId}`)
+            showAlert("Book deleted successfully!")
 
-            setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId));
+            setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId))
+            setPastReads(prevPastReads => prevPastReads.filter(book => book.id !== bookId))
+            setFutureReads(prevFutureReads => prevFutureReads.filter(book => book.id !== bookId))
+
+            localStorage.setItem("pastReads", JSON.stringify(pastReads.filter(book => book.id !== bookId)))
+            localStorage.setItem("futureReads", JSON.stringify(futureReads.filter(book => book.id !== bookId)))
+
         } catch (error) {
             if (axios.isAxiosError(error) && error.response) {
-                showAlert(error.response.data.message);
+                showAlert(error.response.data.message)
             } else {
-                console.error("There was an error deleting the book:", error);
-                showAlert("Failed to delete book. Please try again.");
+                console.error("There was an error deleting the book:", error)
+                showAlert("Failed to delete book. Please try again.")
             }
         }
-    };
+    }
 
 
     return (
