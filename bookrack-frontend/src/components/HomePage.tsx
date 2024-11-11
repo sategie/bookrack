@@ -37,7 +37,7 @@ export default function HomePage({books}:Readonly<HomePageProps>) {
                 you have read in the past and books
                 you would like to read in the future.</p>
             <div className={styles.explore}>
-                <button onClick={() => navigate('/allbooks')}>
+                <button className={styles.btn} onClick={() => navigate('/allbooks')}>
                     Explore All Books
                 </button>
             </div>

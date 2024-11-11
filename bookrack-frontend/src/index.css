@@ -14,9 +14,17 @@
   min-height: 100vh;
 }
 
+html {
+  font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 32rem;
   min-height: 100vh;
   font-size: 1.8rem;
   font-weight: 400;
@@ -39,6 +47,8 @@ h1 {
 }
 
 button {
+  background-color: #007bff;
+  color: #fff;
   border-radius: 1rem;
   border: 0.1rem solid transparent;
   padding: 1rem;
@@ -47,10 +57,9 @@ button {
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-button:hover {
-  border-color: #90B7E4;
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
