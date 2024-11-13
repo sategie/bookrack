@@ -1,3 +1,3 @@
 # Bookrack
 
-![Image of home page] (bookrack/readme-assets/homepage)
+![Image of home page](/readme-assets/homepage.png)
