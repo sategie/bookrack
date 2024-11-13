@@ -2,7 +2,7 @@
 
 ![Image of home page](/readme-assets/homepage.png)
 
-[View the live project here](https://bookrack.onrender.com/)
+<a href="https://bookrack.onrender.com/" target="_blank">Click this link to view the deployed project</a>
 
 ## Project Goals
 
