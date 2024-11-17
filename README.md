@@ -58,8 +58,22 @@ can be added to the Future Reads.
 
 This page allows you to add a new book to the database.
 It checks if a book with the same title and author already exists in the database prior to adding the book.
-If the book already exists, an alert is displayed to inform the user. 
+
+If the book already exists, the book is not added and an alert is displayed to inform the user.
+
 If the book does not already exist in the database, the book is added and an alert is displayed 
 informing the user accordingly.
 
 ![Image of Add Book page](/readme-assets/add-book.png)
+
+## Features Left to Implement
+
+### Login
+
+I plan to add a login functionality in order for users to be able to store books specific to their accounts.
+
+### Database for Past/Future Reads
+
+At the moment, the Past/Future Reads are stored on the client side (browser) via Local Storage.
+
+I plan to create separate collections within MongoDB to store the Past/Future Reads on the backend.
